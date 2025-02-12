@@ -1,4 +1,9 @@
-# Web Template
+# Weather Forest Using API
 
-    This is to serve as a template for a web project that uses webpack for bundling.
-    Simply use this as a template during git repository creation to get a pre-setup project environment with webpack.
+This project is aimed to practise the use of API with weather API provided by visual crossing.
+
+
+## Acknowledgements
+
+ - [Visual Crossing Weather API](https://www.visualcrossing.com/weather-api)
+
