@@ -1,0 +1,145 @@
+/*
+  Josh's Custom CSS Reset
+  https://www.joshwcomeau.com/css/custom-css-reset/
+*/
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  overflow-wrap: break-word;
+}
+
+p {
+  text-wrap: pretty;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  text-wrap: balance;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+/* My Css */
+:root {
+  --snow-background-color: white;
+  --snow-font-color: black;
+  --partially-cloudy-background-color: navy;
+  --partially-cloudy-color: white;
+  --overcast-background-color: grey;
+  --overcast-font-color: black;
+  --clear-background-color: skyblue;
+  --clear-font-color: white;
+  --rainy-background-color: black;
+  --rainy-font-color: white;
+}
+
+body {
+  height: 100vh;
+  display: grid;
+  grid-template-rows: minmax(50px, 1.5fr) minmax(500px, 85vh) minmax(30px, 1fr);
+}
+
+header,
+footer {
+  display: grid;
+  place-items: center;
+}
+
+header {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.container {
+  background-image: url("../img/default.jpg");
+  opacity: 0.8;
+  display: grid;
+  place-content: center;
+  grid-template: auto minmax(250px, 25vh) / minmax(325px, 20vw);
+}
+
+.container * {
+  opacity: 1;
+}
+
+.content {
+  background-color: rgba(255, 255, 255, 0.6);
+  border-radius: 5px;
+  padding: 2em;
+  display: grid;
+  grid-template-areas:
+    "logo temperature"
+    "condition condition"
+    "prediction prediction";
+  box-shadow: 0px -10px var(--default-background-color);
+  grid-template-columns: minmax(20px, 1fr) minmax(30px, 3fr);
+  grid-template-rows: minmax(50px, 2fr) repeat(2, minmax(15px, 1fr));
+  align-items: center;
+}
+
+.logo-container {
+  grid-area: logo;
+}
+
+.current-temperature {
+  font-size: 2rem;
+  grid-area: temperature;
+  justify-self: end;
+}
+
+.current-condition {
+  grid-area: condition;
+}
+
+.average-condition {
+  grid-area: prediction;
+}
+
+form {
+  display: flex;
+  justify-content: space-between;
+  padding: 1em;
+  border-radius: 5px;
+}
