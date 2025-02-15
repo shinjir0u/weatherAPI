@@ -1,9 +1,13 @@
+import Temperature from "./temperature";
+
 class ScreenController {
   #WeatherForcast;
 
   #weatherCondition = document.querySelector(".current-condition");
 
   #weatherTemperature = document.querySelector(".current-temperature");
+
+  #weatherTemperatureScale = document.querySelector(".temperature-scale");
 
   #weatherPrediction = document.querySelector(".average-condition");
 
@@ -12,6 +16,10 @@ class ScreenController {
   #locationForm = document.querySelector("form");
 
   #locationInput = document.querySelector("input[type='text']");
+
+  #fahrenheitButton = document.querySelector(".fahrenheit-button");
+
+  #celsiusButton = document.querySelector(".celsius-button");
 
   #backgroundColorUpdates = document.querySelectorAll(
     ".background-color-update",
@@ -76,7 +84,9 @@ class ScreenController {
       .#updatePrediction(prediction)
       .#updateBackgroundColor(currentCondition)
       .#updateFontColor(currentCondition)
-      .#addFormEvent();
+      .#addFormEvent()
+      .#addCelsiusButtonEvent()
+      .#addFahrenheitButtonEvent();
     return this;
   }
 
@@ -89,8 +99,9 @@ class ScreenController {
     return this;
   }
 
-  #updateTemperature(temperature) {
+  #updateTemperature(temperature, temperatureScale = "F") {
     this.#weatherTemperature.textContent = temperature;
+    this.#weatherTemperatureScale.textContent = temperatureScale;
     return this;
   }
 
@@ -131,6 +142,44 @@ class ScreenController {
     event.preventDefault();
     const location = this.#locationInput.value;
     this.updateScreen(location);
+  }
+
+  #addFahrenheitButtonEvent() {
+    this.#fahrenheitButton.addEventListener("click", () => {
+      this.#fahrenButtonEventHandler();
+    });
+    return this;
+  }
+
+  #fahrenButtonEventHandler() {
+    if (this.#weatherTemperatureScale.textContent === "C") {
+      const convertedTemperature = Temperature.convertTemperature(
+        Number.parseInt(this.#weatherTemperature.textContent),
+        "celsius",
+        "fahrenheit",
+      );
+      this.#weatherTemperature.textContent = convertedTemperature.toFixed(1);
+      this.#weatherTemperatureScale.textContent = "F";
+    }
+  }
+
+  #addCelsiusButtonEvent() {
+    this.#celsiusButton.addEventListener("click", () => {
+      this.#celsiusButtonEventHandler();
+    });
+    return this;
+  }
+
+  #celsiusButtonEventHandler() {
+    if (this.#weatherTemperatureScale.textContent === "F") {
+      const convertedTemperature = Temperature.convertTemperature(
+        Number.parseInt(this.#weatherTemperature.textContent),
+        "fahrenheit",
+        "celsius",
+      );
+      this.#weatherTemperature.textContent = convertedTemperature.toFixed(1);
+      this.#weatherTemperatureScale.textContent = "C";
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 class Temperature {
-  #temperatureConversion = new Map(
+  static #temperatureConversion = new Map([
     ["celsius-fahrenheit", (temperature) => temperature * (9 / 5) + 32],
     ["fahrenheit-celsius", (temperature) => (temperature - 32) * (5 / 9)],
     ["celsius-kelvin", (temperature) => temperature + 273.15],
@@ -12,12 +12,12 @@ class Temperature {
       "kelvin-fahrenheit",
       (temperature) => (temperature - 273.15) * (9 / 5) + 32,
     ],
-  );
+  ]);
 
-  convertTemperature(inputUnit, outputUnit) {
+  static convertTemperature(temperature, inputUnit, outputUnit) {
     const conversion = `${inputUnit}-${outputUnit}`;
     if (this.#temperatureConversion.has(conversion))
-      return this.#temperatureConversion.get(conversion);
+      return this.#temperatureConversion.get(conversion)(temperature);
   }
 }
 

@@ -27,8 +27,3 @@ class WeatherForcast {
 }
 
 export default WeatherForcast;
-
-/* 
-  currentConditions.temperature
-  currentConditions.feelslike
-*/

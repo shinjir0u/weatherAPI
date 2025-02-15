@@ -59,7 +59,11 @@
       </svg>
     </div>
     <header class="background-color-update font-color-update">
-      Weather API
+      <p class="heading">Weather API</p>
+      <div class="degree-buttons">
+        <button class="degree-button fahrenheit-button" type="button">F</button>
+        <button class="degree-button celsius-button" type="button">C</button>
+      </div>
     </header>
     <div class="container">
       <form action="#" class="background-color-update">
@@ -73,7 +77,10 @@
       </form>
       <div class="content">
         <div class="logo-container"><svg></svg></div>
-        <h3 class="current-temperature"></h3>
+        <div class="temperature-container">
+          <h3 class="current-temperature"></h3>
+          <p class="temperature-scale"></p>
+        </div>
         <p class="current-condition"></p>
         <p class="average-condition"></p>
       </div>
