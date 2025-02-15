@@ -3,6 +3,8 @@ import Temperature from "./temperature";
 class ScreenController {
   #WeatherForcast;
 
+  #contentContainer = document.querySelector(".container");
+
   #weatherCondition = document.querySelector(".current-condition");
 
   #weatherTemperature = document.querySelector(".current-temperature");
@@ -15,7 +17,7 @@ class ScreenController {
 
   #locationForm = document.querySelector("form");
 
-  #locationInput = document.querySelector("input[type='text']");
+  #locationInput = document.querySelector("#location");
 
   #weatherAddress = document.querySelector(".address");
 
@@ -33,42 +35,36 @@ class ScreenController {
     [
       "Partially cloudy",
       {
-        image: "../img/partially-cloudy-day.jpg",
+        image: document.querySelector(".partially-cloudy-day-image"),
         icon: document.querySelector(".partially-cloudy-icon"),
       },
     ],
     [
       "Clear",
       {
-        image: "../img/clear-day.jpg",
+        image: document.querySelector(".clear-day-image"),
         icon: document.querySelector(".clear-icon"),
       },
     ],
     [
       "Overcast",
       {
-        image: "../img/overcast-day.jpg",
+        image: document.querySelector(".overcast-day-image"),
         icon: document.querySelector(".overcast-icon"),
       },
     ],
     [
       "Rain",
       {
-        image: "../img/rainy-day.jpg",
+        image: document.querySelector(".rainy-day-image"),
         icon: document.querySelector(".rainy-icon"),
       },
     ],
     [
       "Snow",
       {
-        image: "../img/snowy-day.jpg",
+        image: document.querySelector(".snowy-day-image"),
         icon: document.querySelector(".snowy-icon"),
-      },
-    ],
-    [
-      "Default",
-      {
-        image: "../img/default.jpg",
       },
     ],
   ]);
@@ -81,7 +77,8 @@ class ScreenController {
     try {
       const { currentCondition, temperature, prediction, address } =
         await this.#WeatherForcast.getWeather(location);
-      this.#updateAddress(address)
+      this.#updateBackgroundImage(currentCondition)
+        .#updateAddress(address)
         .#updateCondtion(currentCondition)
         .#updateTemperature(temperature)
         .#updateLogo(currentCondition)
@@ -96,6 +93,12 @@ class ScreenController {
       alert("No such country");
       return null;
     }
+  }
+
+  #updateBackgroundImage(condition) {
+    if (this.#WeatherUI.has(condition))
+      this.#contentContainer.style.backgroundImage = `url(${this.#WeatherUI.get(condition).image.src})`;
+    return this;
   }
 
   #updateAddress(address) {
