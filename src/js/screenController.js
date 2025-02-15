@@ -17,6 +17,8 @@ class ScreenController {
 
   #locationInput = document.querySelector("input[type='text']");
 
+  #weatherAddress = document.querySelector(".address");
+
   #fahrenheitButton = document.querySelector(".fahrenheit-button");
 
   #celsiusButton = document.querySelector(".celsius-button");
@@ -76,17 +78,28 @@ class ScreenController {
   }
 
   async updateScreen(location) {
-    const { currentCondition, temperature, prediction } =
-      await this.#WeatherForcast.getWeather(location);
-    this.#updateCondtion(currentCondition)
-      .#updateTemperature(temperature)
-      .#updateLogo(currentCondition)
-      .#updatePrediction(prediction)
-      .#updateBackgroundColor(currentCondition)
-      .#updateFontColor(currentCondition)
-      .#addFormEvent()
-      .#addCelsiusButtonEvent()
-      .#addFahrenheitButtonEvent();
+    try {
+      const { currentCondition, temperature, prediction, address } =
+        await this.#WeatherForcast.getWeather(location);
+      this.#updateAddress(address)
+        .#updateCondtion(currentCondition)
+        .#updateTemperature(temperature)
+        .#updateLogo(currentCondition)
+        .#updatePrediction(prediction)
+        .#updateBackgroundColor(currentCondition)
+        .#updateFontColor(currentCondition)
+        .#addFormEvent()
+        .#addCelsiusButtonEvent()
+        .#addFahrenheitButtonEvent();
+      return this;
+    } catch (error) {
+      alert("No such country");
+      return null;
+    }
+  }
+
+  #updateAddress(address) {
+    this.#weatherAddress.textContent = address;
     return this;
   }
 

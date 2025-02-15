@@ -131,16 +131,21 @@ header {
 .content {
   background-color: rgba(255, 255, 255, 0.6);
   border-radius: 5px;
-  padding: 2em;
+  padding: 1em 2em 2em;
   display: grid;
   grid-template-areas:
+    "address address"
     "logo temperature"
     "condition condition"
     "prediction prediction";
   box-shadow: 2px 2px 5px black;
   grid-template-columns: minmax(20px, 1fr) minmax(30px, 3fr);
-  grid-template-rows: minmax(50px, 2fr) repeat(2, minmax(15px, 1fr));
+  grid-template-rows: minmax(30px, 1fr) minmax(50px, 2fr) repeat(2, minmax(15px, 1fr));
   align-items: center;
+}
+
+.address {
+  grid-area: address;
 }
 
 .logo-container {

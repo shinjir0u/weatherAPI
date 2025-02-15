@@ -19,6 +19,7 @@ class WeatherForcast {
         currentCondition: responseJSON.currentConditions.conditions,
         temperature: responseJSON.currentConditions.temp,
         prediction: responseJSON.description,
+        address: responseJSON.resolvedAddress,
       };
     } catch (error) {
       return "Error Caught";
