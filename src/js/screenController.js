@@ -7,7 +7,17 @@ class ScreenController {
 
   #weatherPrediction = document.querySelector(".average-condition");
 
-  #weatherLogo = document.querySelector(".logo");
+  #weatherLogoContainer = document.querySelector(".logo-container");
+
+  #locationForm = document.querySelector("form");
+
+  #locationInput = document.querySelector("input[type='text']");
+
+  #backgroundColorUpdates = document.querySelectorAll(
+    ".background-color-update",
+  );
+
+  #fontColorUpdates = document.querySelectorAll(".font-color-update");
 
   #WeatherUI = new Map([
     [
@@ -63,13 +73,19 @@ class ScreenController {
     this.#updateCondtion(currentCondition)
       .#updateTemperature(temperature)
       .#updateLogo(currentCondition)
-      .#updatePrediction(prediction);
+      .#updatePrediction(prediction)
+      .#updateBackgroundColor(currentCondition)
+      .#updateFontColor(currentCondition)
+      .#addFormEvent();
     return this;
   }
 
   #updateLogo(condition) {
     if (this.#WeatherUI.has(condition))
-      this.#weatherLogo.replaceWith(this.#WeatherUI.get(condition).icon.cloneNode(true));
+      this.#weatherLogoContainer.firstElementChild.replaceWith(
+        this.#WeatherUI.get(condition).icon.cloneNode(true),
+      );
+
     return this;
   }
 
@@ -86,6 +102,35 @@ class ScreenController {
   #updatePrediction(prediction) {
     this.#weatherPrediction.textContent = prediction;
     return this;
+  }
+
+  #updateBackgroundColor(condition) {
+    const formattedCondition = condition.toLowerCase().split(" ").join("-");
+    this.#backgroundColorUpdates.forEach((element) => {
+      element.style.backgroundColor = `var(--${formattedCondition}-background-color)`;
+    });
+    return this;
+  }
+
+  #updateFontColor(condition) {
+    const formattedCondition = condition.toLowerCase().split(" ").join("-");
+    this.#fontColorUpdates.forEach((element) => {
+      element.style.color = `var(--${formattedCondition}-font-color)`;
+    });
+    return this;
+  }
+
+  #addFormEvent() {
+    this.#locationForm.addEventListener("submit", (event) => {
+      this.#formEventHandler(event);
+    });
+    return this;
+  }
+
+  #formEventHandler(event) {
+    event.preventDefault();
+    const location = this.#locationInput.value;
+    this.updateScreen(location);
   }
 }
 

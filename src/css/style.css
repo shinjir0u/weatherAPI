@@ -66,13 +66,13 @@ h6 {
   --snow-background-color: white;
   --snow-font-color: black;
   --partially-cloudy-background-color: navy;
-  --partially-cloudy-color: white;
+  --partially-cloudy-font-color: white;
   --overcast-background-color: grey;
   --overcast-font-color: black;
   --clear-background-color: skyblue;
   --clear-font-color: white;
-  --rainy-background-color: black;
-  --rainy-font-color: white;
+  --rain-background-color: black;
+  --rain-font-color: white;
 }
 
 body {
@@ -85,11 +85,11 @@ header,
 footer {
   display: grid;
   place-items: center;
+  font-weight: bold;
 }
 
 header {
   font-size: 2rem;
-  font-weight: bold;
 }
 
 .container {
@@ -113,7 +113,7 @@ header {
     "logo temperature"
     "condition condition"
     "prediction prediction";
-  box-shadow: 0px -10px var(--default-background-color);
+  box-shadow: 2px 2px 5px black;
   grid-template-columns: minmax(20px, 1fr) minmax(30px, 3fr);
   grid-template-rows: minmax(50px, 2fr) repeat(2, minmax(15px, 1fr));
   align-items: center;
@@ -142,4 +142,5 @@ form {
   justify-content: space-between;
   padding: 1em;
   border-radius: 5px;
+  box-shadow: 2px -1px 5px black;
 }
