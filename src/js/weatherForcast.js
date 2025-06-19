@@ -1,5 +1,7 @@
+const apiKey = process.env.API_KEY;
+
 class WeatherForcast {
-  #API_KEY = "AA3Z9X7MHFBAEXUF7FKNDL7VE";
+  #API_KEY = apiKey;
 
   #BASE_URL =
     "https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/";
